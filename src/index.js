@@ -14,29 +14,26 @@ class CarFinder {
     }
 
     processCarData(data) {
-        // Process the data to get unique years, makes, and models
         const processed = {
             years: new Set(),
             makesByYear: {},
             modelsByMake: {},
+            rawData: data, // Store raw data for later use
         };
 
         data.forEach((car) => {
             const year = car.year;
             const make =
-                car.Manufacturer.charAt(0).toUpperCase() + car.Manufacturer.slice(1); // Capitalize manufacturer name
+                car.Manufacturer.charAt(0).toUpperCase() + car.Manufacturer.slice(1);
             const model = car.model;
 
-            // Add year
             processed.years.add(year);
 
-            // Add make for the year
             if (!processed.makesByYear[year]) {
                 processed.makesByYear[year] = new Set();
             }
             processed.makesByYear[year].add(make);
 
-            // Add model for the make
             const makeKey = `${year}-${make}`;
             if (!processed.modelsByMake[makeKey]) {
                 processed.modelsByMake[makeKey] = new Set();

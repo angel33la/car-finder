@@ -7,6 +7,11 @@ $form-disabled: rgba(144, 144, 144, 1.00);
 $selected-option: rgba(33, 33, 33, 1.00);
 $border-radius: 5px;
 $transition-speed: 0.3s;
+$breakpoint: 768px;
+$font-size: 16px;
+$font-family: 'Open Sans', sans-serif;
+$font-weight: 400;
+$font-style: normal;
 
 // Mixins
 @mixin flex-center {
@@ -30,7 +35,9 @@ $transition-speed: 0.3s;
 
 // Base styles
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: $font-family;
+  font-optical-sizing: auto;
+  font-style: $font-style;
   background: url('/assets/car-finder-bg.jpg') no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
@@ -48,9 +55,43 @@ body {
   }
 }
 
+// Header styles
+header {
+  text-align: center;
+  margin-bottom: 20px;
+
+  h1 {
+    font-size: 2.5em;
+    color: $primary-header;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: $font-size;
+    color: $subtext-color;
+    font-weight: 500;
+    margin-bottom: 10px;    
+    font-weight: 400;
+    line-height: 1.5;
+    @include responsive(768px) {
+      font-size: 1em;
+    } 
+  }
+}
+
 // Car finder styles
 .car-finder {
   background: $form-panel-bg;
+  font-size: 1.2em;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  overflow: auto;
   padding: 40px;
   border-radius: $border-radius;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -59,20 +100,13 @@ body {
     padding: 20px;
   }
 
-  h1 {
-    text-align: center;
-    color: $selected-option;
-    margin-bottom: 30px;
-    font-size: 2.5em;
-    font-weight: 700;
-  }
 }
 
 // Search controls
 .search-controls {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 10px;
 
   @include responsive(768px) {
     grid-template-columns: 1fr;
@@ -82,12 +116,18 @@ body {
 // Select group styles
 .select-group {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 40px;
 
   label {
     margin-bottom: 8px;
     color: $selected-option;
     font-weight: 500;
+    font-size: 1.5em;
+    color: $form-blue; 
   }
 
   select {
